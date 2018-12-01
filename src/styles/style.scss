@@ -1,0 +1,93 @@
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100vh;
+}
+
+.__timer-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+  flex-wrap: wrap;
+
+  .__time {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+
+    @include media-breakpoint-down(md) {
+      width: 46%;
+    }
+  }
+
+  .__colon {
+    width: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;
+    position: relative;
+    top: -9px;
+    margin-left: 1%;
+
+    @include media-breakpoint-down(md) {
+      font-size: 3rem;
+      top: -3px;
+
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+    margin-top: -10%;
+    font-style: italic;
+  }
+
+  h1 {
+    font-size: 10rem;
+    text-align: center;
+    margin: 0;
+
+    @include media-breakpoint-down(md) {
+      font-size: 5rem;
+    }
+  }
+}
+
+.__title {
+  margin-bottom: auto;
+}
+
+.__footer {}
+
+h2,
+p {
+  text-align: center;
+  margin: 0;
+}
+
+h2 {
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+@include media-breakpoint-down(md) {
+  p {
+    font-size: 0.7rem;
+  }
+}
