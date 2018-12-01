@@ -1,11 +1,51 @@
 @import "~bootstrap/scss/bootstrap";
 
+
+@font-face {
+  font-family: 'Impact';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/impact.ttf');
+}
+
+@font-face {
+  font-family: 'Cordia';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/CORDIA.ttf');
+}
+
+$impact: Impact,
+sans-serif;
+$cordia: Cordia,
+sans-serif;
+
+$gray: #404040;
+
+html {
+  @include media-breakpoint-up(sm) {
+    font-size: 16px;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 13px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: 14px;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
   overflow: hidden;
   width: 100vw;
   height: 100vh;
+}
+
+#root {
+  visibility: hidden;
 }
 
 .App {
@@ -19,16 +59,32 @@ body {
 
 .__timer-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   text-align: center;
   width: 100%;
   margin-top: auto;
-  flex-wrap: wrap;
+  margin-bottom: 3rem;
 
   .__time {
-    width: 15%;
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    flex: 10 0 0%;
+
+    @include media-breakpoint-up(md) {
+      max-width: 20%;
+    }
+
+    >div {
+      position: absolute;
+      left: 50%;
+      bottom: 0%;
+
+      >p {
+        position: relative;
+        left: -50%;
+      }
+    }
+
 
     @include media-breakpoint-down(md) {
       width: 46%;
@@ -36,14 +92,12 @@ body {
   }
 
   .__colon {
-    width: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 6rem;
     position: relative;
-    top: -9px;
-    margin-left: 1%;
+    max-width: 30px;
 
     @include media-breakpoint-down(md) {
       font-size: 3rem;
@@ -54,23 +108,39 @@ body {
 
   p {
     margin-bottom: 0;
-    margin-top: -10%;
     font-style: italic;
+    font-family: $cordia;
+    color: $gray;
   }
 
   h1 {
-    font-size: 10rem;
+    font-family: $impact;
     text-align: center;
+    color: $gray;
     margin: 0;
+    font-size: 6rem;
 
-    @include media-breakpoint-down(md) {
-      font-size: 5rem;
+    @include media-breakpoint-up(sm) {
+      font-size: 6rem;
+    }
+
+    @include media-breakpoint-up(md) {
+      font-size: 10rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 16rem;
     }
   }
 }
 
 .__title {
+  text-align: center;
   margin-bottom: auto;
+
+  img {
+    max-width: 150px;
+  }
 }
 
 .__footer {}
@@ -84,10 +154,4 @@ p {
 h2 {
   margin-top: 25px;
   font-weight: bold;
-}
-
-@include media-breakpoint-down(md) {
-  p {
-    font-size: 0.7rem;
-  }
 }

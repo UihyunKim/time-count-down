@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import produce from 'immer';
 import './styles/style.scss';
 
+import logo from './img/drawing.svg';
+
 class App extends Component {
 
   constructor(props) {
@@ -12,10 +14,10 @@ class App extends Component {
       hours: "",
       minutes: "",
       seconds: "",
-      expired: false
+      expired: false,
+      loading: false,
     }
   }
-
 
   componentDidMount() {
     // Set the date we're counting down to
@@ -41,6 +43,7 @@ class App extends Component {
         draft.hours = hours.length === 1 ? `${hours}` : hours;
         draft.minutes = minutes.length === 1 ? `0${minutes}` : minutes;
         draft.seconds = seconds.length === 1 ? `0${seconds}` : seconds;
+        draft.loading = true;
       }))
 
       // If the count down is finished, write some text 
@@ -53,21 +56,32 @@ class App extends Component {
     }, 1000);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.loading) {
+      document.getElementById('root').style.visibility = 'visible';
+    }
+  }
+
   render() {
     const { days, hours, minutes, seconds } = this.state;
+
     return (
       <div className="App">
         <div className="__timer-container">
           <div className="__time">
             <h1>{days}</h1>
-            <p>Days</p>
+            <div>
+              <p>Days</p>
+            </div>
           </div>
           <div className="__colon">
             :
             </div>
           <div className="__time">
             <h1>{hours}</h1>
-            <p>Hours</p>
+            <div>
+              <p>Hours</p>
+            </div>
           </div>
           <div className="d-none d-md-flex __colon">
             :
@@ -75,24 +89,27 @@ class App extends Component {
           <div className="w-100 d-md-none"></div>
           <div className="__time">
             <h1>{minutes}</h1>
-            <p>Minutes</p>
+            <div>
+              <p>Minutes</p>
+            </div>
           </div>
           <div className="__colon">
             :
             </div>
           <div className="__time">
             <h1>{seconds}</h1>
-            <p>Seconds</p>
+            <div>
+              <p>Seconds</p>
+            </div>
           </div>
         </div>
         <div className="__title">
-          <h2>SYSTEM</h2>
+          <img src={logo} alt="system logo" />
           <p>OFFICIAL LAUNCH January 15th 5pm - PARIS</p>
         </div>
         <div className="__footer">
-          <p>@system_studios</p>
+          <p>sales@system-studios.com</p>
           <p>commercial@system-studios.com</p>
-          <p>press@system-studios.com</p>
           <p>+33 6 98 67 04 05</p>
           <p>+33 1 81 69 95 71</p>
         </div>
