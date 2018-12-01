@@ -3,6 +3,8 @@ import produce from 'immer';
 import './styles/style.scss';
 
 import logo from './img/drawing.svg';
+import device from 'current-device'
+
 
 class App extends Component {
 
@@ -16,6 +18,10 @@ class App extends Component {
       seconds: "",
       expired: false,
       loading: false,
+      device: {
+        type: "",
+        orientation: ""
+      }
     }
   }
 
@@ -54,6 +60,19 @@ class App extends Component {
         }))
       }
     }, 1000);
+
+    this.setState(produce(draft => {
+      draft.device = {
+        type: device.type,
+        orientation: device.orientation,
+      }
+    }))
+
+    device.onChangeOrientation(newOrientation => {
+      this.setState(produce(draft => {
+        draft.device.orientation = newOrientation;
+      }))
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -63,10 +82,10 @@ class App extends Component {
   }
 
   render() {
-    const { days, hours, minutes, seconds } = this.state;
+    const { days, hours, minutes, seconds, device: { orientation, type } } = this.state;
 
     return (
-      <div className="App">
+      <div className={`App ${orientation} ${type}`}>
         <div className="__timer-container">
           <div className="__time">
             <h1>{days}</h1>
